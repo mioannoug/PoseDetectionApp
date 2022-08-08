@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.example.myapp.R
 import com.example.myapp.presentation.ui.theme.*
 
@@ -27,7 +28,8 @@ import com.example.myapp.presentation.ui.theme.*
 fun ProfileHeaderSection(
     modifier: Modifier = Modifier,
     user:User,
-    onEditClick: () -> Unit ={}
+    onEditClick: () -> Unit ={},
+    profileImageUrl: String? = null
 ) {
     Column(
         modifier = modifier
@@ -36,7 +38,12 @@ fun ProfileHeaderSection(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.mike_image) ,
+            painter = rememberImagePainter(
+                data = profileImageUrl,
+                builder = {
+                    crossfade(true)
+                }
+            ) ,
             contentDescription ="",
             modifier = Modifier
                 .size(ProfilePictureSizeLarge)
